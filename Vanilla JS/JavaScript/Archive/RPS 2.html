@@ -1,0 +1,322 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Rock Paper Scissors Game</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">	</head>
+	</head>
+
+<body>
+    <section class="game">
+        <!--Title -->
+        <div class="title">Rock Paper Scissors</div>
+
+        <!--Display Score of the player and computer -->
+        <div class="score">
+            <div class="userScore">
+                <h4>Player</h4>
+                <p class="player-score count">0</p>
+
+            </div>
+            <div class="computerScore">
+                <h4>Computer</h4>
+                <p class="computer-score count">0</p>
+
+            </div>
+        </div>
+
+        <div class="move">Please choose either Rock, Paper or Scissors</div>
+
+        <!--Number of moves left before game ends -->
+        <div class="movesleft">Number of moves left: 5 </div> 
+		
+        <!-- Options for player to select to play game -->
+        <div class="options">
+            <button class="rock">Rock</button>
+            <button class="paper">Paper</button>
+            <button class="scissor">Scissors</button>
+        </div>
+
+
+        <!--Final result of game -->
+        <div class="playerChoice"></div>
+		<div class="compChoice"></div>
+	
+		<div class="result"></div>
+
+        <!--Reload the game -->
+        <button class="reload"></button>
+
+    </section>
+
+    <script src="app.js"></script>
+	
+			
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<style>
+    /* styles.css */
+    /* universal selector - Applies to whole document */
+    *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background: #6c082c;
+    color: #fff;
+	font-family: Garamond, serif;
+    }
+    /* Center  */
+    .game{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    /* Title */
+    .title{
+    position: absolute;
+    top: 0;
+    font-size: 2.5rem;
+    z-index: 2;
+    }
+    
+    /* Score Board */
+    .score{
+    display: flex;
+    width: 30vw;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 70px;
+    z-index: 1;
+    }
+    
+    /* Score  */
+    .player-score,.computer-score{
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    }
+    
+    /* displaying three buttons in one line */
+    .options{
+    display: flex;
+    width: 50vw;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+    }
+    
+    /* Styling on all three buttons */
+    .rock, .paper, .scissor{
+    padding: 0.8rem;
+    width: 100px;
+    border-radius: 12px;
+    background: black;
+    outline: none;
+    border-color: black;
+    border: none;
+    cursor: pointer;
+    }
+    
+    .move{
+    font-size: 2rem;
+    }
+    
+    /* Reload button style */
+    .reload {
+    display: none;
+    margin-top: 2rem;
+    padding: 1rem;
+    background: black;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    }
+    
+    .result{
+    margin-top: 20px;
+    font-size: 1.2rem;
+    }
+    
+    /* Responsive Design */
+    @media screen and (max-width: 612px)
+    {  
+    .title{
+        text-align: center;
+    }
+    .score{
+        position: absolute;
+        top: 200px;
+        width: 100vw;
+    }
+    .options{
+        width: 100vw;
+    }
+	
+	
+	
+	
+
+</style>
+<script>
+    // app.js
+    
+    // Complete logic of game inside this function
+    const game = () => {
+    let userScore = 0;
+    let computerScore = 0;
+    let moves = 0;
+    
+    
+    // Function to play Game
+	// reads a players selection opton
+    const rpsGamePlay = () => {
+        const rockBtn = document.querySelector('.rock');
+        const paperBtn = document.querySelector('.paper');
+        const scissorBtn = document.querySelector('.scissor');
+        const playerOptions = [rockBtn,paperBtn,scissorBtn];
+        const computerOptions = ['rock','paper','scissors']
+        
+        // Function to start playing game
+        playerOptions.forEach(option => {
+            option.addEventListener('click',function(){
+    
+                const movesLeft = document.querySelector('.movesleft');
+                moves++;
+                movesLeft.innerText = `Moves Left: ${5-moves}`;
+                
+    
+                const choiceNumber = Math.floor(Math.random()*3);
+                const computerChoice = computerOptions[choiceNumber];
+    
+                // Function to check who wins
+                winner(this.innerText,computerChoice)
+                
+                // Calling gameOver function after 5 moves
+                if(moves == 5){
+                    gameOver(playerOptions,movesLeft);
+                }
+            })
+        })
+        
+    }
+    
+    // Function to decide winner
+    const winner = (player,computer) => {
+		const playerChoice = document.querySelector('.playerChoice');
+		const compChoice = document.querySelector('.compChoice');
+        const result = document.querySelector('.result');
+        const playerScoreBoard = document.querySelector('.player-score');
+        const computerScoreBoard = document.querySelector('.computer-score');
+        player = player.toLowerCase();
+        computer = computer.toLowerCase();
+        if(player === computer){
+            	playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'Its a Tie';
+        }
+        else if(player == 'rock'){
+            if(computer == 'paper'){
+				playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'Computer Won';
+                computerScore++;
+                computerScoreBoard.textContent = computerScore;
+    
+            }else{
+				playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'You Won';
+                userScore++;
+                playerScoreBoard.textContent = userScore;
+            }
+        }
+        else if(player == 'scissors'){
+            if(computer == 'rock'){
+                playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'Computer Won';
+                computerScore++;
+                computerScoreBoard.textContent = computerScore;
+            }else{
+                playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'You Won';
+                userScore++;
+                playerScoreBoard.textContent = userScore;
+            }
+        }
+        else if(player == 'paper'){
+            if(computer == 'scissors'){
+                playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'Computer Won';
+                computerScore++;
+                computerScoreBoard.textContent = computerScore;
+            }else{
+                playerChoice.textContent = 'Your Choice Was: ' + player 
+				compChoice.textContent = 'Computer Choice Was: ' + computer
+                result.textContent =  'You Won';
+                userScore++;
+                playerScoreBoard.textContent = userScore;
+            }
+        }
+    }
+    
+    // Function to run when game is over
+    const gameOver = (playerOptions,movesLeft) => {
+    
+        const chooseMove = document.querySelector('.move');
+        const result = document.querySelector('.result');
+        const reloadBtn = document.querySelector('.reload');
+    
+        playerOptions.forEach(option => {
+            option.style.display = 'none';
+        })
+    
+     
+        chooseMove.innerText = 'Game Over!!'
+        movesLeft.style.display = 'none';
+    
+        if(userScore > computerScore){
+            result.style.fontSize = '2rem';
+            result.innerText = 'Congratulations, you won' 
+            result.style.color = 'green';
+        }
+        else if(userScore < computerScore){
+            result.style.fontSize = '2rem';
+            result.innerText = 'Sorry, you lost';
+            result.style.color = 'red';
+        }
+        else{
+            result.style.fontSize = '2rem';
+            result.innerText = 'This time it was a tie';
+            result.style.color = 'grey'
+        }
+        reloadBtn.innerText = 'Restart';
+        reloadBtn.style.display = 'flex'
+        reloadBtn.addEventListener('click',() => {
+            window.location.reload();
+        })
+    }
+    
+    
+    // Calling rpsGamePlay function inside game
+    rpsGamePlay();
+    
+    }
+    
+    // Calling the game function
+    game();
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset=utf-8 />
+        <title>Activity 2 - Vanilla JS DOM</title>
+    </head> 
+	
+    <body>
+<!-- form details -->	
+	<form name="sphereCalc" action="" id="Myform" method="post">
+	    <p id ='text'>Input radius value and get the volume of a sphere</p> 
+		<label for="radius">Radius:</label><br>
+		<input type="text" id="radius" name="radius"><br><br>
+		<label for="volume">Volume:</label><br>
+		<input type="text" id="volume" name="volume" ><br><br>
+		<br><br>
+        <input type=submit value= "Calcuate" id="submit">
+	</form> 
+	
+	<script>
+	
+	/*	Calculate sphere with inputting the radius
+		formual V=(4/3)*pi*r^3
+		e.g radius = 2
+		v = (4/3)*3.14*2^3
+		v = 33.15
+	*/ 
+	
+	function js_calculate() {
+
+		let n = document.getElementById('radius').value;
+		let pi = 3.14;
+		let v = (4/3)*pi*n**3;
+		document.getElementById('volume').value=parseFloat(v).toFixed(3);
+		return false;
+		
+	console.log(v)
+	}
+	
+	window.onload = document.getElementById('Myform').onsubmit = js_calculate;
+	
+	</script>
+
+    </body>
+</html>

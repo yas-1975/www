@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<body>
+
+	<h2>Activity 3 - Vanilla JS Arrays</h2>
+	<p id="demo"></p>
+	
+	<script>
+	// program to sum the values within 
+	// an array
+	
+	let num = [25, 14, 56, 15, 36, 56, 77, 18, 29, 49]; //array values
+
+	let minNum = Math.min(...num); // find the minimum value
+	let maxNum = Math.max(...num); // find the maximum value
+	
+    document.getElementById("demo").innerHTML =  "Original array = " + "[" + num + "]" + "<br>" + "Maximum value for the above array = " + maxNum +
+	"<br>" + "Miniumum value for the above array = " + minNum;
+
+	</script>
+
+	</body>
+</html>

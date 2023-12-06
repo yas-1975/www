@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset=utf-8 />
+        <title>Activity 1 - Vanilla JS DOM</title>
+    </head> 
+    <body>
+        <p id ='text'>Vanilla JS DOM</p> 
+        <div>
+        <button id="jsstyle"
+        onclick="js_style()">Style</button>
+        </div>
+
+	<script>
+	
+	function js_style() {
+		let x = document.getElementsByTagName("p");
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.fontStyle = "italic"; //change the text to italic
+			x[i].style.color = "blue";  //change font color to blue
+		}
+	}
+					
+	</script>
+	
+
+    </body>
+</html>

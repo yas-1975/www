@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<body>
+
+	<h2>Activity 2 - Vanilla JS Arrays</h2>
+	<p id="demo"></p>
+	
+	<script>
+	// program to sum the values within 
+	// an array
+	
+	let num = [20, 30, 25, 35, -16, 60, -100]; //array values
+	let sumValue = 0;
+	
+	for (let i = 0; i < num.length; i++ ) {
+	sumValue += num[i];
+	}
+    document.getElementById("demo").innerHTML = parseFloat(sumValue / num.length).toFixed(1); //output the average to 1 decimal place
+
+	</script>
+
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<body>
+
+	<h2>Activity 1 - Control Statements</h2>
+
+	<p id="demo"></p>
+	<script>
+	/* script to compare three numbers to check if they
+	are equal, are all different or are neither equal 
+	or different
+	*/
+	const firstNum = prompt("Input first number:"); //prompt the user to input first number
+    const secondNum = prompt("Input second number:"); //prompt the user to input second number
+	const thirdNum = prompt("Input third number:"); //prompt the user to input third number
+	let numCompare;
+
+if (firstNum == secondNum && firstNum == thirdNum) { //check if numbers are equal
+        numCompare = "All numbers are equal";
+	} else if (firstNum != secondNum && firstNum != thirdNum && secondNum != thirdNum) { //check if all numbers are different
+		numCompare = "All numbers are different";
+	} else {
+		numCompare = "Neither all are equal or different"; //not equal or different
+	}
+	document.getElementById("demo").innerHTML = numCompare //prints the comparison comment
+
+	</script>
+
+	</body>
+</html>
